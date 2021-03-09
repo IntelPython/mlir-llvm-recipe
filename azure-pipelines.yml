@@ -1,0 +1,17 @@
+trigger:
+- master
+
+pool:
+  vmImage: windows-2019
+
+steps:
+
+  - script: |
+      set /p llvm-sha=<llvm-sha.txt
+      mkdir mlir-llvm
+      copy llvm-sha.txt mlir-llvm\llvm-sha.txt
+    displayName: 'Build and publish artifact'
+
+  - publish: $(System.DefaultWorkingDirectory)/mlir-llvm
+    artifact: 'mlir-llvm_$(llvm-sha)_$(Agent.OS)'
+    displayName: 'Publish artifact'
