@@ -16,6 +16,7 @@ jobs:
       git clone https://github.com/llvm/llvm-project.git
       cd llvm-project
       git checkout %llvm-sha%
+      call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
       cmake ..\llvm-project\llvm -G "Ninja" -DLLVM_ENABLE_PROJECTS=mlir -DLLVM_BUILD_EXAMPLES=ON -DLLVM_TARGETS_TO_BUILD="host" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DCMAKE_INSTALL_PREFIX=..\mlir-llvm
       ninja install
     displayName: 'Build'
