@@ -9,7 +9,7 @@ steps:
   - script: |
       set /p llvm-sha=<llvm-sha.txt
       call cmake --version
-      call pip install -y cmake ninja -c conda-forge
+      call pip install cmake ninja -c conda-forge
       call cmake --version
 #      git clone https://github.com/llvm/llvm-project.git
 #      cd llvm-project
