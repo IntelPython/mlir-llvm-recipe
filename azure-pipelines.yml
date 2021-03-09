@@ -8,13 +8,16 @@ steps:
 
   - script: |
       set /p llvm-sha=<llvm-sha.txt
-      git clone https://github.com/llvm/llvm-project.git
-      cd llvm-project
-      git checkout %llvm-sha%
-      cmake ..\llvm-project\llvm -G "Ninja" -DLLVM_ENABLE_PROJECTS=mlir -DLLVM_BUILD_EXAMPLES=ON -DLLVM_TARGETS_TO_BUILD="host" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DCMAKE_INSTALL_PREFIX=..\mlir-llvm
-      ninja install
+      call cmake --version
+      call conda install -y cmake ninja -c conda-forge
+      call cmake --version
+#      git clone https://github.com/llvm/llvm-project.git
+#      cd llvm-project
+#      git checkout %llvm-sha%
+#      cmake ..\llvm-project\llvm -G "Ninja" -DLLVM_ENABLE_PROJECTS=mlir -DLLVM_BUILD_EXAMPLES=ON -DLLVM_TARGETS_TO_BUILD="host" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DCMAKE_INSTALL_PREFIX=..\mlir-llvm
+#      ninja install
     displayName: 'Build'
 
-  - publish: $(System.DefaultWorkingDirectory)/mlir-llvm
-    artifact: 'mlir-llvm_latest_$(Agent.OS)'
-    displayName: 'Publish artifact'
+#  - publish: $(System.DefaultWorkingDirectory)/mlir-llvm
+#    artifact: 'mlir-llvm_latest_$(Agent.OS)'
+#    displayName: 'Publish artifact'
