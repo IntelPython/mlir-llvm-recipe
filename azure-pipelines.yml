@@ -1,9 +1,9 @@
+trigger:
+  - master
+
 jobs:
 - job: LLVM
   timeoutInMinutes: 0
-
-  trigger:
-    - master
 
   pool:
     vmImage: windows-2019
