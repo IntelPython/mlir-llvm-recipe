@@ -12,7 +12,7 @@ jobs:
   - script: |
       set /p TEMPSHA=<llvm-sha.txt
       echo %TEMPSHA%
-      echo "##vso[task.setvariable variable=LLVMSHA;]shasha"
+      echo ##vso[task.setvariable variable=LLVMSHA;]shasha
       echo $(LLVMSHA)
     displayName: 'Read commit SHA'
 
