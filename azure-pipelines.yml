@@ -14,7 +14,8 @@ jobs:
   steps:
   - script: |
       call cmake --version
-      set /p LLVM-SHA=<llvm-sha.txt
+      set /p SHA=<llvm-sha.txt
+      Write-Host "##vso[task.setvariable variable=LLVM-SHA;]$SHA"
       mkdir mlir-llvm
       copy llvm-sha.txt mlir-llvm\llvm-sha.txt
 #      call pip install ninja
