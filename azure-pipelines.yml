@@ -9,13 +9,16 @@ jobs:
     vmImage: windows-2019
 
   steps:
+  - script: |
+      set /p TEMP-SHA=<llvm-sha.txt
+      echo %TEMP-SHA%
+    displayName: 'Read commit SHA'
+
   - task: PowerShell@2
     displayName: 'Set commit SHA'
     inputs:
       targetType: 'inline'
       script: |
-        set /p TEMP-SHA=<llvm-sha.txt
-        echo %TEMP-SHA%
         Write-Host "##vso[task.setvariable variable=LLVM-SHA;]%TEMP-SHA%"
 
   - publish: $(System.DefaultWorkingDirectory)/llvm-sha.txt
