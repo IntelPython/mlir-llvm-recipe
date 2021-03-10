@@ -12,10 +12,18 @@ jobs:
     vmImage: windows-2019
 
   steps:
+  - task: PowerShell@2
+    displayName: 'Set commit SHA'
+    inputs:
+      targetType: 'inline'
+      script: |
+        set /p SHA=<llvm-sha.txt
+        Write-Host "##vso[task.setvariable variable=LLVM-SHA;]$SHA"
+    
   - script: |
       call cmake --version
-      set /p SHA=<llvm-sha.txt
-      Write-Host "##vso[task.setvariable variable=LLVM-SHA;]$SHA"
+#      set /p SHA=<llvm-sha.txt
+#      Write-Host "##vso[task.setvariable variable=LLVM-SHA;]$SHA"
       mkdir mlir-llvm
       copy llvm-sha.txt mlir-llvm\llvm-sha.txt
 #      call pip install ninja
