@@ -10,12 +10,12 @@ jobs:
 
   steps:
   - script: |
-      set /p TEMP-SHA=<llvm-sha.txt
-      echo %TEMP-SHA%
-      "C:\windows\System32\WindowsPowerShell\v1.0\powershell.exe" Write-Host "##vso[task.setvariable variable=LLVM-SHA;]%TEMP-SHA%"
-      echo $(LLVM-SHA)
+      set /p TEMPSHA=<llvm-sha.txt
+      echo %TEMPSHA%
+      echo "##vso[task.setvariable variable=LLVMSHA;]shasha"
+      echo $(LLVMSHA)
     displayName: 'Read commit SHA'
 
   - publish: $(System.DefaultWorkingDirectory)/llvm-sha.txt
-    artifact: 'mlir-llvm_$(LLVM-SHA)_$(Agent.OS)'
+    artifact: 'mlir-llvm_$(LLVMSHA)_$(Agent.OS)'
     displayName: 'Publish artifact'
