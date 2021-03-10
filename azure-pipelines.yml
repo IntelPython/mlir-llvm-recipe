@@ -18,4 +18,8 @@ jobs:
 
   - publish: $(System.DefaultWorkingDirectory)/llvm-sha.txt
     artifact: 'mlir-llvm_$(LLVMSHA)_$(Agent.OS)'
-    displayName: 'Publish artifact'
+    displayName: 'Publish sha artifact'
+
+  - publish: $(System.DefaultWorkingDirectory)/llvm-sha.txt
+    artifact: 'mlir-llvm_lllatest_$(Agent.OS)'
+    displayName: 'Publish latest artifact'
