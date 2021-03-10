@@ -18,7 +18,7 @@ jobs:
       targetType: 'inline'
       script: |
         set /p SHA=<llvm-sha.txt
-        Write-Host "##vso[task.setvariable variable=LLVM-SHA;]SHASHA"
+        Write-Host "##vso[task.setvariable variable=LLVM-SHA;]$(SHA)"
 
   - publish: $(System.DefaultWorkingDirectory)/llvm-sha.txt
     artifact: 'mlir-llvm_$(LLVM-SHA)_$(Agent.OS)'
