@@ -19,7 +19,7 @@ jobs:
       script: |
         set /p SHA=<llvm-sha.txt
         Write-Host "##vso[task.setvariable variable=LLVM-SHA;]$SHA"
-    
+
   - script: |
       call cmake --version
 #      set /p SHA=<llvm-sha.txt
