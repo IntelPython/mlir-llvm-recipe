@@ -6,6 +6,7 @@ jobs:
   timeoutInMinutes: 0
   
   variables:
+    TEMP-SHA: 'empty'
     LLVM-SHA: 'empty'
 
   pool:
@@ -17,8 +18,8 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |
-        set /p SHA=<llvm-sha.txt
-        Write-Host "##vso[task.setvariable variable=LLVM-SHA;]$(SHA)"
+        set /p TEMP-SHA=<llvm-sha.txt
+        Write-Host "##vso[task.setvariable variable=LLVM-SHA;]$(TEMP-SHA)"
 
   - publish: $(System.DefaultWorkingDirectory)/llvm-sha.txt
     artifact: 'mlir-llvm_$(LLVM-SHA)_$(Agent.OS)'
