@@ -20,21 +20,6 @@ jobs:
         set /p SHA=<llvm-sha.txt
         Write-Host "##vso[task.setvariable variable=LLVM-SHA;]$SHA"
 
-  - script: |
-      call cmake --version
-#      set /p SHA=<llvm-sha.txt
-#      Write-Host "##vso[task.setvariable variable=LLVM-SHA;]$SHA"
-      mkdir mlir-llvm
-      copy llvm-sha.txt mlir-llvm\llvm-sha.txt
-#      call pip install ninja
-#      git clone https://github.com/llvm/llvm-project.git
-#      cd llvm-project
-#      git checkout %LLVM-SHA%
-#      call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-#      cmake ..\llvm-project\llvm -G "Ninja" -DLLVM_ENABLE_PROJECTS=mlir -DLLVM_BUILD_EXAMPLES=ON -DLLVM_TARGETS_TO_BUILD="host" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DCMAKE_INSTALL_PREFIX=..\mlir-llvm
-#      ninja install
-    displayName: 'Build'
-
-  - publish: $(System.DefaultWorkingDirectory)/mlir-llvm
+  - publish: $(System.DefaultWorkingDirectory)/llvm-sha.txt
     artifact: 'mlir-llvm_$(LLVM-SHA)_$(Agent.OS)'
     displayName: 'Publish artifact'
