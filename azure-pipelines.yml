@@ -19,6 +19,7 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |
+        echo %TEMP-SHA%
         Write-Host "##vso[task.setvariable variable=LLVM-SHA;]%TEMP-SHA%"
 
   - publish: $(System.DefaultWorkingDirectory)/llvm-sha.txt
