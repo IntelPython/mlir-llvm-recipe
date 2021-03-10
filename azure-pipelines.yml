@@ -13,6 +13,7 @@ jobs:
       set /p TEMP-SHA=<llvm-sha.txt
       echo %TEMP-SHA%
       "C:\windows\System32\WindowsPowerShell\v1.0\powershell.exe" Write-Host "##vso[task.setvariable variable=LLVM-SHA;]%TEMP-SHA%"
+      echo $(LLVM-SHA)
     displayName: 'Read commit SHA'
 
   - publish: $(System.DefaultWorkingDirectory)/llvm-sha.txt
