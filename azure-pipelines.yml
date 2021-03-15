@@ -30,21 +30,48 @@ jobs:
     # artifact: 'mlir-llvm_latest_$(Agent.OS)'
     # displayName: 'Publish latest artifact'
 
-- job: Linux
+# - job: Linux
+  # timeoutInMinutes: 0
+
+  # pool:
+    # vmImage: ubuntu-20.04
+
+  # steps:
+  # - script: |
+      # cmake --version
+      # read SHA < llvm-sha.txt
+      # echo "##vso[task.setvariable variable=LLVMSHA;]$SHA"
+      # git clone https://github.com/llvm/llvm-project.git
+      # cd llvm-project
+      # git checkout $SHA
+      # cmake ../llvm-project/llvm -DLLVM_ENABLE_PROJECTS=mlir -DLLVM_BUILD_EXAMPLES=ON -DLLVM_TARGETS_TO_BUILD="host" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_RTTI=ON -DCMAKE_INSTALL_PREFIX=../mlir-llvm
+      # cmake --build .
+      # cmake --install .
+    # displayName: 'Build'
+
+  # - publish: $(System.DefaultWorkingDirectory)/mlir-llvm
+    # artifact: 'mlir-llvm_$(LLVMSHA)_$(Agent.OS)'
+    # displayName: 'Publish sha artifact'
+
+  # - publish: $(System.DefaultWorkingDirectory)/mlir-llvm
+    # artifact: 'mlir-llvm_latest_$(Agent.OS)'
+    # displayName: 'Publish latest artifact'
+
+- job: MacOS
   timeoutInMinutes: 0
 
   pool:
-    vmImage: ubuntu-20.04
+    vmImage: macOS-10.15
 
   steps:
   - script: |
       cmake --version
       read SHA < llvm-sha.txt
-      echo ##vso[task.setvariable variable=LLVMSHA;]$SHA
+      echo "##vso[task.setvariable variable=LLVMSHA;]$SHA"
       git clone https://github.com/llvm/llvm-project.git
       cd llvm-project
       git checkout $SHA
-      cmake ../llvm-project/llvm -DLLVM_ENABLE_PROJECTS=mlir -DLLVM_BUILD_EXAMPLES=ON -DLLVM_TARGETS_TO_BUILD="host" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DCMAKE_INSTALL_PREFIX=../mlir-llvm
+      cmake ../llvm-project/llvm -DLLVM_ENABLE_PROJECTS=mlir -DLLVM_BUILD_EXAMPLES=ON -DLLVM_TARGETS_TO_BUILD="host" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_RTTI=ON -DCMAKE_INSTALL_PREFIX=../mlir-llvm
       cmake --build .
       cmake --install .
     displayName: 'Build'
